@@ -1,0 +1,14 @@
+so, in this we choose the CI/CD platform (jenikins,Github action,Gitlab)
+--we trigger the pipeline on:
+  -Code push to main branch
+  -Pull request creation 
+--Pipeline stages:
+  1.SAST (Static Analysis)
+  2.Dependency Vulnerebility Scan
+  3.DAST (Dynamic Analysis)
+  4.Compilence check
+  5.Report generation
+  6.Deployment only if all checks pass
+
+so this are stages we follow 
+
