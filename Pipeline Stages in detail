@@ -51,3 +51,5 @@
   - Deployment Decision:
     If all checks pass → promote to production.
     If any fail → block release & notify developers
+
+This project can be done locally with Docker + github
