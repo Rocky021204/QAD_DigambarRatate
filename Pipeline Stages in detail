@@ -1,0 +1,53 @@
+1. Static Application Security Testing (SAST)
+  - Use to detect  vulnerabilities in code before runtime.
+  - Tools we can use for that SonarQube, Checkmarx, Fortify.
+  Implementation:
+  - Install the SAST tool on the CI/CD runner.
+  - Run scan on pushed code.
+  - Generate report highlighting critical, high, medium, and low vulnerabilities.
+  
+2. Dependency Vulnerability Scan
+   - To ensure third-party packages/libraries are secure.
+   - Detect vulnerable libraries/packages.
+   - Tools we can use for that Synk (Supports multiple languages), OWASP (Java,.Net), Fortify.
+   Implementation:
+   - CI/CD triggers scan on package files (package.json, requirements.txt, pom.xml).
+   - Identify vulnerable packages with CVE references.
+   - Provide remediation suggestions (update package, patch).
+
+3. Dynamic Application Security Testing (DAST)
+   - Detects runtime vulnerabilities.
+   - Tool can use OWASP ZAP (open-source, automated scans), Burp Suite.
+   Implementation:
+   - Deploy app in a test/staging environment.
+   - Run automated penetration testing to simulate attacks.
+   - Identify issues like broken auth, XSS, CSRF, insecure headers.
+
+4. Compliance Checks
+   - Enforce security standards & regulations.
+   - we can use OpenSCAP (system compilence scanning).
+   - Runs in CI/CD before deployment approval
+
+5. Reporting & Remediation
+   - Aggregate results from all stages: SAST, DAST, dependency scans, compliance.
+   - Generate prioritized security report.
+   - Integrate with Jira/GitHub Issues for developers to fix.
+   - Include automated notifications for failures.
+   - Using SonaQube dashboard, ZAP html reports
+   
+6. Deployment Architecture
+   - Developer Workflow:
+     Code pushed to GitHub/GitLab triggers CI/CD pipeline.
+  - Pipeline Execution:
+    Step 1: Run SAST immediately.
+    Step 2: Run dependency scans before build.
+    Step 3: Build Docker image → scan image with Trivy.
+    Step 4: Deploy app in staging (Kubernetes/Docker).
+    Step 5: Run DAST + penetration tests against staging.
+    Step 6: Run compliance checks.
+  - Reporting & Alerts:
+    Push results to dashboards (SonarQube, Grafana).
+    Send Slack/Email alerts on failures. Auto-create Jira tickets for high-severity issues.
+  - Deployment Decision:
+    If all checks pass → promote to production.
+    If any fail → block release & notify developers
