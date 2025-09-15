@@ -1,2 +1,1 @@
-# QAD_DigambarRatate
-nwe repo
+Continuous security testing pipeline
